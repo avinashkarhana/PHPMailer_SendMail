@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 05, 2022 at 01:01 PM
+-- Generation Time: Apr 05, 2022 at 06:40 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -35,6 +35,7 @@ CREATE TABLE `account_for_emails` (
   `SMTP_Host` varchar(100) NOT NULL,
   `SMTP_Port` int(6) NOT NULL,
   `SMTPSecure` varchar(10) NOT NULL,
+  `email_limit` int(5) NOT NULL,
   `email_count` int(4) NOT NULL,
   `next_Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -43,9 +44,9 @@ CREATE TABLE `account_for_emails` (
 -- Dumping data for table `account_for_emails`
 --
 
-INSERT INTO `account_for_emails` (`Sender_name`, `UserName`, `Password`, `SMTP_Host`, `SMTP_Port`, `SMTPSecure`, `email_count`, `next_Date`) VALUES
-('ABC', 'ABC@yahoo.com', 'APP_Password_From_Security_Page_from_yahoo', 'smtp.mail.yahoo.com', 587, 'tls', 0, '2022-04-03'),
-('CDE', 'CDE@gmail.com', 'GMAIL_PASSWORD', 'smtp.gmail.com', 587, 'tls', 500, '2022-04-03');
+INSERT INTO `account_for_emails` (`Sender_name`, `UserName`, `Password`, `SMTP_Host`, `SMTP_Port`, `SMTPSecure`, `email_limit`, `email_count`, `next_Date`) VALUES
+('ABC', 'ABC@yahoo.com', 'APP_Password_From_Security_Page_from_yahoo', 'smtp.mail.yahoo.com', 587, 'tls', 500, 0, '2022-04-03'),
+('CDE', 'CDE@gmail.com', 'GMAIL_PASSWORD', 'smtp.gmail.com', 587, 'tls', 500, 50, '2022-04-03');
 
 --
 -- Indexes for dumped tables
