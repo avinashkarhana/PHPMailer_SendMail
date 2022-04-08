@@ -34,19 +34,20 @@ CREATE TABLE `account_for_emails` (
   `Password` varchar(100) NOT NULL,
   `SMTP_Host` varchar(100) NOT NULL,
   `SMTP_Port` int(6) NOT NULL,
-  `SMTPSecure` varchar(10) NOT NULL,
-  `email_limit` int(5) NOT NULL,
-  `email_count` int(4) NOT NULL,
-  `next_Date` date NOT NULL
+  `SMTP_Security` varchar(10) NOT NULL,
+  `Daily_Email_Limit` int(5) NOT NULL,
+  `Consequtive_Email_Count` int(4) NOT NULL,
+  `Next_Date` date NOT NULL,
+  `Enabled` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `account_for_emails`
 --
 
-INSERT INTO `account_for_emails` (`Sender_name`, `UserName`, `Password`, `SMTP_Host`, `SMTP_Port`, `SMTPSecure`, `email_limit`, `email_count`, `next_Date`) VALUES
-('ABC', 'ABC@yahoo.com', 'APP_Password_From_Security_Page_from_yahoo', 'smtp.mail.yahoo.com', 587, 'tls', 500, 0, '2022-04-03'),
-('CDE', 'CDE@gmail.com', 'GMAIL_PASSWORD', 'smtp.gmail.com', 587, 'tls', 500, 50, '2022-04-03');
+INSERT INTO `account_for_emails` (`Sender_name`, `UserName`, `Password`, `SMTP_Host`, `SMTP_Port`, `SMTP_Security`, `Daily_Email_Limit`, `Consequtive_Email_Count`, `Next_Date`, `Enabled`) VALUES
+('ABC', 'ABC@yahoo.com', 'APP_Password_From_Security_Page_from_yahoo', 'smtp.mail.yahoo.com', 587, 'tls', 500, 0, '2022-04-03', '1'),
+('CDE', 'CDE@gmail.com', 'GMAIL_PASSWORD', 'smtp.gmail.com', 587, 'tls', 500, 50, '2022-04-03', '1');
 
 --
 -- Indexes for dumped tables

@@ -51,13 +51,14 @@
             $alternateBody: The body of the email in Text format
             $attachmentsPaths: An key-value pairs of fileNames to the filePaths to be attached in mail
         */
+        
         global $conn;
-        $sqlQuery = "SELECT * FROM `account_for_emails` WHERE next_Date < NOW()";
+        $sqlQuery = "SELECT * FROM `account_for_emails` WHERE Next_Date < NOW() AND Enabled = 1";
         $queryResult = mysqli_query($conn, $sqlQuery);
         $row = "";
         $row_count = 0;
         while( $data = mysqli_fetch_assoc($queryResult)){
-            if($data['limit']>$data['count']){
+            if($data['Daily_Email_Limit']>$data['Consequtive_Email_Count']){
                 $row = $data;
                 $row_count = $row_count + 1;
                 break;
@@ -71,7 +72,7 @@
         $senderName = $row['Sender_name'];
         $SMTP_Host = $row['SMTP_Host'];
         $SMTP_Port = $row['SMTP_Port'];
-        $SMTPSecure = $row['SMTPSecure'];
+        $SMTPSecure = $row['SMTP_Security'];
     
         // passing true in constructor enables exceptions in PHPMailer
         $mail = new PHPMailer(true);
@@ -109,9 +110,9 @@
             print_r([$senderName, $UserName, $Password, $SMTP_Host, $SMTP_Port, $SMTPSecure]);
 
             $mail->send();
-            mysqli_query($conn, "UPDATE `account_for_emails` SET `email_count` = `email_count` + 1 WHERE `UserName` = '$UserName'");
-            if ($row['email_count'] > 498){
-                mysqli_query($conn, "UPDATE `account_for_emails` SET `next_Date` = (CURDATE()+INTERVAL 1 DAY) WHERE `UserName` = '$UserName'");
+            mysqli_query($conn, "UPDATE `account_for_emails` SET `Consequtive_Email_Count` = `Consequtive_Email_Count` + 1 WHERE `UserName` = '$UserName'");
+            if ($row['Consequtive_Email_Count'] > $row['Daily_Email_Limit']) {
+                mysqli_query($conn, "UPDATE `account_for_emails` SET `Next_Date` = (CURDATE()+INTERVAL 1 DAY) WHERE `UserName` = '$UserName'");
             }
             return true;
         } catch (Exception $e) {
