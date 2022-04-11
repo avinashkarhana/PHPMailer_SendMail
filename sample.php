@@ -23,7 +23,10 @@
     @$toName = $_POST['name'];
     @$message = $_POST['message'];
     @$subject = $_POST['subject'];
-    $attachmentsPaths = ['images/landscape.jpg', 'images/compass.jpg'];
+    $attachmentsPaths = array(
+        'landscape' => 'images/landscape.jpg',
+        'comapss' => 'images/compass.jpg'
+     );
 
     if(!empty($toEmail)){
         echo "Result: ";

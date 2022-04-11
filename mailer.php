@@ -96,8 +96,8 @@
         
             // Add attachments
             if($attachmentsPaths != "") {
-                foreach($attachmentsPaths as $attachmentPath) {
-                    $mail->addAttachment($attachmentPath);
+                foreach($attachmentsPaths as $attachmentName => $attachmentPath) {
+                    $mail->addAttachment($attachmentPath, $attachmentName);
                 }
             }
 
